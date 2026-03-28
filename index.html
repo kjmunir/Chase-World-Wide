@@ -1303,14 +1303,6 @@
   </div>
 </section>
 
-<!-- Lightbox overlay -->
-<div id="lightbox">
-  <button id="lightbox-close">✕</button>
-  <button id="lightbox-prev">‹</button>
-  <img id="lightbox-img" src="" alt="">
-  <button id="lightbox-next">›</button>
-</div>
-
 <style>
   .carousel {
     width: 100%;
@@ -1326,67 +1318,19 @@
   .carousel-track img {
     min-width: 100%;
     width: 100%;
-    height: auto;
-    max-height: 80vh;
-    object-fit: contain;
+    height: 500px;
+    object-fit: cover;
+    object-position: center top;
     flex-shrink: 0;
     border-radius: 8px;
-    cursor: pointer;
-    transition: opacity 0.2s;
   }
+</style>
 
-  .carousel-track img:hover { opacity: 0.85; }
-
-  #lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.92);
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-  }
-
-  #lightbox.active { display: flex; }
-
-  #lightbox-img {
-    max-width: 90vw;
-    max-height: 90vh;
-    object-fit: contain;
-    border-radius: 6px;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-  }
-
-  #lightbox-close {
-    position: fixed;
-    top: 20px; right: 28px;
-    background: none; border: none;
-    color: white; font-size: 2rem;
-    cursor: pointer; opacity: 0.8;
-    transition: opacity 0.2s;
-  }
-  #lightbox-close:hover { opacity: 1; }
-
-  #lightbox-prev,
-  #lightbox-next {
-    position: fixed;
-    top: 50%; transform: translateY(-50%);
-    background: rgba(255,255,255,0.15);
-    border: none; color: white;
-    font-size: 2.5rem; padding: 12px 18px;
-    cursor: pointer; border-radius: 4px;
-    transition: background 0.2s;
-  }
-  #lightbox-prev { left: 16px; }
-  #lightbox-next { right: 16px; }
-  #lightbox-prev:hover,
-  #lightbox-next:hover { background: rgba(255,255,255,0.3); }
-</style><script>
-  // --- Carousel ---
-  const track  = document.querySelector('.carousel-track');
-  const imgs   = Array.from(track.querySelectorAll('img'));
-  const total  = imgs.length;
-  let current  = 0;
+<script>
+  const track   = document.querySelector('.carousel-track');
+  const imgs    = track.querySelectorAll('img');
+  const total   = imgs.length;
+  let current   = 0;
   let autoPlay;
 
   function goTo(index) {
@@ -1395,49 +1339,25 @@
   }
 
   document.getElementById('prevBtn').addEventListener('click', () => {
-    goTo(current - 1); resetAutoPlay();
+    goTo(current - 1);
+    resetAutoPlay();
   });
+
   document.getElementById('nextBtn').addEventListener('click', () => {
-    goTo(current + 1); resetAutoPlay();
+    goTo(current + 1);
+    resetAutoPlay();
   });
 
   function startAutoPlay() {
     autoPlay = setInterval(() => goTo(current + 1), 4000);
   }
+
   function resetAutoPlay() {
-    clearInterval(autoPlay); startAutoPlay();
-  }
-  startAutoPlay();
-
-  // --- Lightbox ---
-  const lightbox    = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  let lightboxIndex = 0;
-
-  function openLightbox(index) {
-    lightboxIndex = (index + total) % total;
-    lightboxImg.src = imgs[lightboxIndex].src;
-    lightbox.classList.add('active');
     clearInterval(autoPlay);
-  }
-  function closeLightbox() {
-    lightbox.classList.remove('active');
-    lightboxImg.src = '';
     startAutoPlay();
   }
 
-  imgs.forEach((img, i) => img.addEventListener('click', () => openLightbox(i)));
-  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
-  document.getElementById('lightbox-prev').addEventListener('click', () => openLightbox(lightboxIndex - 1));
-  document.getElementById('lightbox-next').addEventListener('click', () => openLightbox(lightboxIndex + 1));
-  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-
-  document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('active')) return;
-    if (e.key === 'ArrowRight') openLightbox(lightboxIndex + 1);
-    if (e.key === 'ArrowLeft')  openLightbox(lightboxIndex - 1);
-    if (e.key === 'Escape')     closeLightbox();
-  });
+  startAutoPlay();
 </script>
 
   <section id="schedule">
