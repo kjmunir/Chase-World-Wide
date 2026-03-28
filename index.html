@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chase Munir-Allston — 2026 Summer Travel League Fund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:     #0b2740;
+      --navy-mid: #123a5f;
+      --sky:      #76C7F0;
+      --gold:     #f5a623;
+      --gold-lt:  #ffc84a;
+      --green:    #00D632;
+      --black:    #000000;
+      --white:    #f4f1eb;
+      --gray:     #8a96a8;
+
+      --display:  'Barlow Condensed', sans-serif;
+      --body:     'Nunito', sans-serif;
+
+      /* FUNDRAISING GOAL */
+      --raised:   250;
+      --goal:     2500;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--navy);
+      font-family: var(--body);
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(11, 39, 64, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-logo {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--sky);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-donate {
+      background: var(--gold);
+      color: var(--navy) !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 4px;
+      font-weight: 800 !important;
+    }
+    .nav-donate:hover { background: var(--gold-lt); color: var(--navy) !important; }
+
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--navy);
+    }
+    .court-bg {
+      position: absolute; inset: 0;
+      opacity: 0.07;
+      background-image:
+        radial-gradient(circle at 50% 50%, transparent 28%, rgba(245,166,35,0.8) 29%, rgba(245,166,35,0.8) 30%, transparent 31%),
+        radial-gradient(circle at 50% 50%, transparent 55%, rgba(245,166,35,0.4) 56%, rgba(245,166,35,0.4) 57%, transparent 58%),
+        linear-gradient(rgba(245,166,35,0.6) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,166,35,0.6) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 80px 80px, 80px 80px;
+    }
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .orb1 { width: 500px; height: 500px; top: -100px; right: -100px; background: rgba(118,199,240,0.25); animation: pulse 6s ease-in-out infinite; }
+    .orb2 { width: 300px; height: 300px; bottom: 0; left: -50px; background: rgba(17,34,64,0.8); animation: pulse 8s ease-in-out infinite reverse; }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      max-width: 900px;
+      animation: fadeUp 1s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(245,166,35,0.4);
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      background: rgba(0,0,0,0.25);
+    }
+    .hero-name {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      line-height: 0.9;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    .hero-name span { color: var(--sky); }
+    .hero-sub {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-top: 1rem;
+    }
+    .hero-mission {
+      font-size: 1.15rem;
+      color: rgba(244,241,235,0.85);
+      max-width: 560px;
+      margin: 1.8rem auto 2.5rem;
+      line-height: 1.7;
+    }
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 1rem 2.8rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.25s;
+      box-shadow: 0 0 40px rgba(245,166,35,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--gold-lt);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 50px rgba(245,166,35,0.5);
+    }
+    .scroll-indicator {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: var(--gray); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      font-family: var(--display); font-weight: 600;
+    }
+    .scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    section { padding: 6rem 2rem; }
+    .section-label {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+    }
+    .section-title.light { color: var(--white); }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    #bio { background: var(--white); }
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .bio-photo-wrap { position: relative; }
+    .bio-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+    }
+    .bio-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(135deg, var(--navy-mid) 0%, #1e3a5f 100%);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem;
+    }
+    .bio-photo-placeholder svg { opacity: 0.3; }
+    .bio-photo-placeholder span {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(244,241,235,0.4);
+    }
+    .bio-accent {
+      position: absolute;
+      bottom: -16px; right: -16px;
+      width: 80%; height: 80%;
+      border: 3px solid var(--sky);
+      border-radius: 4px;
+      z-index: -1;
+    }
+    .bio-text p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #3a4a5c;
+      margin-bottom: 1.2rem;
+    }
+
+    #academics { background: var(--navy); }
+    .academics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .academic-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(245,166,35,0.2);
+      border-radius: 6px;
+      padding: 2rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .academic-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .academic-card-label {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .gpa-number {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--white);
+    }
+    .gpa-number span { color: var(--gold); font-size: 2.5rem; }
+    .academic-card h4 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .academic-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .academic-card ul li {
+      font-size: 0.95rem;
+      color: rgba(244,241,235,0.75);
+      padding-left: 1.2rem;
+      position: relative;
+      line-height: 1.5;
+    }
+    .academic-card ul li::before {
+      content: '▸';
+      position: absolute; left: 0;
+      color: var(--gold);
+    }
+
+    #highlights { background: var(--white); }
+    .highlights-intro {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .season-badge {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--sky);
+      color: var(--navy);
+      padding: 0.4rem 1rem;
+      border-radius: 3px;
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .stat-card {
+      background: var(--navy);
+      border-radius: 6px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+    }
+    .stat-value {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 3.5rem;
+      line-height: 1;
+      color: var(--white);
+    }
+    .stat-value sup {
+      font-size: 1.5rem;
+      color: var(--gold);
+    }
+    .stat-label {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-top: 0.5rem;
+    }
+    .highlights-quotes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .quote-card {
+      background: #f0ece3;
+      border-left: 4px solid var(--gold);
+      padding: 1.8rem;
+      border-radius: 0 6px 6px 0;
+    }
+    .quote-card blockquote {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--navy-mid);
+      font-style: italic;
+      margin-bottom: 0.8rem;
+    }
+    .quote-card cite {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    /* Season Stats Chart */
+    .stats-chart {
+      margin-top: 3rem;
+      background: #f0ece3;
+      border-radius: 8px;
+      padding: 1.8rem;
+    }
+    .stats-chart h3 {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--navy-mid);
+      margin-bottom: 1rem;
+    }
+    .stats-chart table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .stats-chart th,
+    .stats-chart td {
+      padding: 0.6rem 0.4rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .stats-chart th {
+      font-family: var(--display);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* Photo Carousel */
+    #photos { background: var(--white); }
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      margin-top: 2rem;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+    .carousel-track img {
+      width: 100%;
+      flex-shrink: 0;
+      object-fit: cover;
+      height: 420px;
+    }
+    .carousel-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .carousel-buttons button {
+      background: var(--sky);
+      border: none;
+      padding: 0.6rem 1.2rem;
+      font-size: 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--navy);
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .carousel-buttons button:hover {
+      background: var(--gold);
+    }
+
+    #schedule { background: var(--navy); }
+    .schedule-table-wrap {
+      margin-top: 2.5rem;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(245,166,35,0.15);
+    }
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.97rem;
+    }
+    .schedule-table thead {
+      background: rgba(245,166,35,0.12);
+    }
+    .schedule-table thead th {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 1rem 1.5rem;
+      text-align: left;
+    }
+    .schedule-table tbody tr {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.2s;
+    }
+    .schedule-table tbody tr:hover {
+      background: rgba(245,166,35,0.05);
+    }
+    .schedule-table tbody td {
+      padding: 1.1rem 1.5rem;
+      color: rgba(244,241,235,0.85);
+      vertical-align: middle;
+    }
+    .schedule-table .td-date {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--white);
+      white-space: nowrap;
+    }
+    .schedule-table .td-name {
+      font-weight: 600;
+      color: var(--white);
+    }
+    .schedule-table .td-location {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+    .status-badge {
+      display: inline-block;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+    .status-confirmed  { background: rgba(0,210,100,0.15); color: #00d264; }
+    .status-upcoming   { background: rgba(245,166,35,0.15); color: var(--gold); }
+    .status-tbd        { background: rgba(138,150,168,0.15); color: var(--gray); }
+    .schedule-note {
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
+      color: var(--gray);
+      font-style: italic;
+    }
+
+    #videos { background: var(--white); }
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.8rem;
+      margin-top: 2.5rem;
+    }
+    .video-card {
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--navy);
+      box-shadow: 0 4px 30px rgba(10,22,40,0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(10,22,40,0.25);
+    }
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #0a1628;
+    }
+    .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+      display: block;
+    }
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 100%);
+      cursor: pointer;
+    }
+    .video-placeholder-icon {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(245,166,35,0.15);
+      border: 2px solid rgba(245,166,35,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      transition: background 0.2s, border-color 0.2s;
+      color: var(--gold);
+    }
+    .video-card:hover .video-placeholder-icon {
+      background: rgba(245,166,35,0.3);
+      border-color: var(--gold);
+    }
+    .video-placeholder span {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(244,241,235,0.4);
+    }
+    .video-meta {
+      padding: 1.2rem 1.5rem;
+    }
+    .video-title {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .video-desc {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+    .video-instructions {
+      margin-top: 2rem;
+      background: #f0ece3;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 6px 6px 0;
+      padding: 1.4rem 1.8rem;
+    }
+    .video-instructions h4 {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .video-instructions p {
+      font-size: 0.9rem;
+      color: #3a4a5c;
+      line-height: 1.7;
+      margin-bottom: 0.5rem;
+    }
+    .video-instructions code {
+      background: rgba(10,22,40,0.08);
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      color: var(--navy);
+    }
+
+    #donate {
+      background: linear-gradient(135deg, var(--navy) 0%, #0d1f3c 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #donate::before {
+      content: '🏀';
+      position: absolute;
+      font-size: 30rem;
+      opacity: 0.03;
+      right: -5rem;
+      top: -5rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .donate-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .donate-why {
+      color: rgba(244,241,235,0.8);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .progress-wrap { margin-bottom: 2.5rem; }
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.75rem;
+    }
+    .progress-raised {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 2.2rem;
+      color: var(--white);
+    }
+    .progress-raised span { color: var(--gold); }
+    .progress-goal {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+    .progress-bar-bg {
+      height: 10px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+      transition: width 1.5s ease;
+      width: 0%;
+    }
+    .progress-note {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 0.5rem;
+    }
+    .tiers { display: flex; flex-direction: column; gap: 1rem; }
+    .tier {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(245,166,35,0.15);
+      border-radius: 6px;
+      padding: 1.2rem 1.5rem;
+      transition: all 0.25s;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .tier:hover {
+      border-color: var(--gold);
+      background: rgba(245,166,35,0.08);
+      transform: translateX(6px);
+    }
+    .tier-amount {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: var(--gold);
+    }
+    .tier-desc {
+      font-size: 0.9rem;
+      color: rgba(244,241,235,0.7);
+      flex: 1;
+      padding: 0 1.5rem;
+    }
+    .tier-arrow {
+      color: var(--gold);
+      font-size: 1.2rem;
+      transition: transform 0.2s;
+    }
+    .tier:hover .tier-arrow { transform: translateX(4px); }
+
+    .donate-cta {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .btn-donate {
+      display: block;
+      text-align: center;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1.1rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .btn-venmo  { background: #3D95CE; color: #fff; }
+    .btn-cashapp{ background: #00D632; color: #000; }
+    .btn-venmo:hover  { background: #2a80b9; transform: translateY(-2px); }
+    .btn-cashapp:hover{ background: #00bc2c; transform: translateY(-2px); }
+
+    .custom-amount {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .custom-amount input {
+      padding: 0.6rem 0.8rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.4);
+      background: rgba(0,0,0,0.2);
+      color: var(--white);
+      min-width: 120px;
+    }
+    .custom-amount button {
+      padding: 0.7rem 1.4rem;
+      border-radius: 4px;
+      border: none;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: var(--display);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .custom-amount button:hover {
+      background: var(--gold-lt);
+      transform: translateY(-2px);
+    }
+
+    .donate-disclaimer {
+      font-size: 0.8rem;
+      color: rgba(138,150,168,0.7);
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
+
+    /* QR Grid */
+    .qr-grid {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
+    }
+    .qr-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid rgba(245,166,35,0.15);
+    }
+    .qr-card h4 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .qr-card a {
+      display: inline-block;
+      text-decoration: none;
+      color: inherit;
+    }
+    .qr-card img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #fff;
+    }
+    .qr-card p {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: rgba(244,241,235,0.8);
+    }
+
+    /* Why Support */
+    #why-support { background: #f0ece3; }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .why-grid p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #3a4a5c;
+      margin-bottom: 1rem;
+    }
+    .why-card {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .why-card h3 {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--navy-mid);
+      margin-bottom: 0.75rem;
+    }
+    .why-card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .why-card li {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      padding-left: 1.1rem;
+      position: relative;
+      color: #3a4a5c;
+    }
+    .why-card li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+
+    /* Sponsorship Packages */
+    .sponsor-packages {
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .sponsor-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 1.6rem;
+      border: 1px solid rgba(245,166,35,0.25);
+    }
+    .sponsor-card h3 {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .sponsor-amount {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .sponsor-card ul {
+      list-style: none;
+      padding-left: 1.1rem;
+      font-size: 0.9rem;
+      color: rgba(244,241,235,0.8);
+    }
+    .sponsor-card ul li {
+      margin-bottom: 0.4rem;
+      position: relative;
+    }
+    .sponsor-card ul li::before {
+      content: '•';
+      position: absolute;
+      left: -0.8rem;
+      color: var(--gold);
+    }
+
+    /* Coach Contact */
+    #coach-contact { background: var(--white); }
+    .coach-card {
+      background: #f0ece3;
+      border-radius: 8px;
+      padding: 1.8rem;
+    }
+    .coach-card h3 {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--navy-mid);
+      margin-bottom: 0.75rem;
+    }
+    .coach-card p {
+      font-size: 0.95rem;
+      color: #3a4a5c;
+      margin-bottom: 0.4rem;
+    }
+
+    footer {
+      background: var(--navy);
+      border-top: 2px solid var(--gold);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .footer-name {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .footer-name span { color: var(--sky); }
+    .footer-tagline {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+    }
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .footer-social a {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-social a:hover { color: var(--gold); }
+    .footer-disclaimer {
+      font-size: 0.75rem;
+      color: rgba(138,150,168,0.5);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .bio-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .bio-accent { display: none; }
+      .academics-grid { grid-template-columns: 1fr; }
+      .highlights-quotes { grid-template-columns: 1fr; }
+      .donate-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .highlights-intro { flex-direction: column; align-items: flex-start; }
+      .videos-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .schedule-table thead th:nth-child(3),
+      .schedule-table tbody td:nth-child(3) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#hero">C.M.A.</a>
+    <ul class="nav-links">
+      <li><a href="#bio">About</a></li>
+      <li><a href="#academics">Academics</a></li>
+      <li><a href="#highlights">Season</a></li>
+      <li><a href="#photos">Photos</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#donate" class="nav-donate">Donate</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="court-bg"></div>
+    <div class="hero-orb orb1"></div>
+    <div class="hero-orb orb2"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">🏀 2026 Summer Travel League — Fundraiser</div>
+
+      <h1 class="hero-name">Chase<br><span>Munir-Allston</span></h1>
+
+      <div class="hero-sub">
+        Mountain Island Charter • Class of 2028 • Power Forward / Small Forward
+      </div>
+
+      <p class="hero-mission">
+        Chase is a 15-year-old sophomore with real college basketball ambitions—playing year-round,
+        training, traveling, and building a foundation that goes far beyond the game. This 2026
+        travel season is a key step in that journey, and your support helps make it possible.
+      </p>
+
+      <a href="#donate" class="btn-primary">Support Chase’s Journey</a>
+
+      <div class="scroll-indicator">
+        <span>Scroll to learn more</span>
+        <div class="scroll-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bio">
+    <div class="container">
+      <div class="bio-grid reveal">
+        <div class="bio-photo-wrap">
+          <!-- Replace src with your real photo file in the repo -->
+          <!-- Example: <img class="bio-photo" src="images/chase-hero.jpg" alt="Chase Munir-Allston" /> -->
+          <div class="bio-photo-placeholder">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+              <circle cx="40" cy="28" r="16" fill="white"/>
+              <path d="M10 72c0-16.569 13.431-30 30-30s30 13.431 30 30" fill="white"/>
+            </svg>
+            <span>Meet Chase.jpg</span>
+          </div>
+          <div class="bio-accent"></div>
+        </div>
+
+        <div class="bio-text">
+          <div class="section-label">About Me</div>
+          <h2 class="section-title">Meet Chase Munir-Allston</h2>
+
+          <p>
+            Chase is a 15-year-old sophomore at Mountain Island Charter—chill, low-drama, suburban,
+            and discerning. He keeps a small circle, values peace, and lets his work on the court
+            speak for itself. Basketball isn’t just something he does; it’s the lane he’s chosen
+            to pursue seriously, with genuine college athletic ambitions.
+          </p>
+          <p>
+            On the floor, Chase plays both power forward and small forward. He’s an
+            <strong>explosive rebounder</strong>, has a <strong>high defensive IQ</strong>, and is a
+            <strong>strong finisher at the rim</strong>. He loves setting up teammates, doing the
+            little things that don’t always show up in the box score, and making winning plays.
+          </p>
+          <p>
+            Off the court, Chase is just as intentional. He’s enrolled in the Gaston College dual
+            enrollment program, putting him on track to graduate high school with an associate’s
+            degree in Cyber Security by age 17. That means he’ll enter college academically ahead,
+            with full athletic eligibility and less pressure than most incoming freshmen.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="academics">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Academics</div>
+        <h2 class="section-title light">Student First,<br>Athlete Always</h2>
+      </div>
+
+      <div class="academics-grid reveal">
+        <div class="academic-card">
+          <div class="academic-card-label">Current GPA</div>
+          <div class="gpa-number">3.3<span>/4.0</span></div>
+          <p style="color: rgba(244,241,235,0.6); font-size:0.9rem; margin-top:1rem; line-height:1.6;">
+            Mountain Island Charter — Dual Enrollment with Gaston College
+          </p>
+        </div>
+
+        <div class="academic-card">
+          <div class="academic-card-label">Junior &amp; Senior Year</div>
+          <h4>Dual Enrollment &amp; Cyber Security</h4>
+          <ul>
+            <li>Enrolled in Gaston College dual enrollment program</li>
+            <li>On track to graduate high school with an Associate’s Degree in Cyber Security</li>
+            <li>Class of 2028 — graduating at 17 with college credits</li>
+            <li>Maintaining strong academic performance while playing year-round basketball</li>
+            <li>Building a foundation for both tech and athletics after high school</li>
+          </ul>
+        </div>
+
+        <div class="academic-card">
+          <div class="academic-card-label">College Plans</div>
+          <h4>Looking Ahead</h4>
+          <ul>
+            <li>
+              Exploring the full range of college athletics—from high-level competition
+              to smaller, relational programs.
+            </li>
+            <li>
+              Enters college academically ahead, potentially with sophomore standing,
+              full athletic eligibility intact.
+            </li>
+            <li>
+              Best fit (for now): calmer, smaller environments with relational coaches
+              and low drama, where he’ll actually be seen.
+            </li>
+            <li>
+              The big picture: build grades, film, fitness, and character so when the
+              right opportunity shows up, he’s ready. No door is closed.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="highlights">
+    <div class="container">
+      <div class="highlights-intro reveal">
+        <div>
+          <div class="section-label">On The Court</div>
+          <h2 class="section-title">2025–2026 Season Highlights</h2>
+        </div>
+        <div class="season-badge">2025–2026 Season</div>
+      </div>
+
+      <div class="stats-row reveal">
+        <div class="stat-card">
+          <div class="stat-value">135</div>
+          <div class="stat-label">Total Points</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-value">72</div>
+          <div class="stat-label">Total Assists</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-value">133</div>
+          <div class="stat-label">Total Rebounds</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-value">10<sup>W</sup></div>
+          <div class="stat-label">Team Record (10–9)</div>
+        </div>
+      </div>
+
+      <div class="stats-chart reveal">
+        <h3>2025–2026 Season Stats Overview</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Stat</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Total Points</td>
+              <td>135</td>
+              <td>Scored across the 2025–2026 high school season as team captain.</td>
+            </tr>
+            <tr>
+              <td>Total Assists</td>
+              <td>72</td>
+              <td>Unselfish playmaker who loves setting up teammates.</td>
+            </tr>
+            <tr>
+              <td>Total Rebounds</td>
+              <td>133</td>
+              <td>Explosive rebounder, especially on the defensive glass.</td>
+            </tr>
+            <tr>
+              <td>Team Record</td>
+              <td>10–9</td>
+              <td>Winning season with Chase serving as team captain.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="highlights-quotes reveal">
+        <div class="quote-card">
+          <blockquote>
+            "[ADD TESTIMONIALS AND LINK FROM THE ACCOLADES HE RECEIVED ONLINE FOR HIS SEASON]"
+          </blockquote>
+          <cite>— Coach / Program Recognition</cite>
+        </div>
+
+        <div class="quote-card">
+          <blockquote>
+            "[WHAT WAS YOUR FAVORITE MOMENT OF THE SEASON?]"
+          </blockquote>
+          <cite>— Chase Munir-Allston</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="photos">
+    <div class="container reveal">
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">Season Photos</h2>
+
+      <div class="carousel">
+        <div class="carousel-track">
+          <!-- Replace these src values with the actual filenames you uploaded -->
+          <img src="Photo Dec 02 2025, 5 32 24 AM.jpg">
+          <img src="Photo Dec 02 2025, 5 33 54 AM.jpg">
+          <img src="Photo Dec 02 2025, 5 37 43 AM.jpg">
+          <img src="Photo Dec 02 2025, 5 38 54 AM.jpg">
+        </div>
+      </div>
+
+      <div class="carousel-buttons">
+        <button id="prevBtn">‹</button>
+        <button id="nextBtn">›</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="schedule">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">On The Road</div>
+        <h2 class="section-title light">2026 Travel League Schedule</h2>
+      </div>
+
+      <div class="schedule-table-wrap reveal">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Tournament</th>
+              <th>Location</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-date">Apr 10–12</td>
+              <td class="td-name">Dru Joyce Classic</td>
+              <td class="td-location">Cleveland, OH</td>
+              <td><span class="status-badge status-confirmed">Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="td-date">Apr 18–19</td>
+              <td class="td-name">Hoopstate Havoc</td>
+              <td class="td-location">Indian Trail, NC</td>
+              <td><span class="status-badge status-confirmed">Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="td-date">May 1–3</td>
+              <td class="td-name">Bob Gibbons</td>
+              <td class="td-location">Atlanta, GA</td>
+              <td><span class="status-badge status-confirmed">Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="td-date">May 15–17</td>
+              <td class="td-name">Atlanta Jam</td>
+              <td class="td-location">Atlanta, GA</td>
+              <td><span class="status-badge status-confirmed">Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="td-date">May 23–24</td>
+              <td class="td-name">AND1 / CBL</td>
+              <td class="td-location">Gatlinburg, TN</td>
+              <td><span class="status-badge status-confirmed">Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="td-date">Jun 21–25</td>
+              <td class="td-name">FELC (Free Enterprise Leadership Challenge)</td>
+              <td class="td-location">Wingate University</td>
+              <td><span class="status-badge status-upcoming">Leadership Camp</span></td>
+            </tr>
+            <tr>
+              <td class="td-date">Jul 9–12</td>
+              <td class="td-name">Best of the South</td>
+              <td class="td-location">Atlanta, GA</td>
+              <td><span class="status-badge status-confirmed">Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="td-date">Jul 17–19</td>
+              <td class="td-name">AND1 / CBL Finals</td>
+              <td class="td-location">Hamilton, OH</td>
+              <td><span class="status-badge status-confirmed">Confirmed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="schedule-note reveal">
+        Schedule subject to change based on team placement, invitations, and bracket results.
+      </p>
+    </div>
+  </section>
+
+  <section id="videos">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Film Room</div>
+        <h2 class="section-title">Video Highlights</h2>
+      </div>
+
+      <div class="videos-grid reveal">
+        <div class="video-card">
+          <div class="video-wrap">
+            <!-- No YouTube yet — placeholder only -->
+            <div class="video-placeholder">
+              <div class="video-placeholder-icon">▶</div>
+              <span>No YouTube Highlights Yet</span>
+            </div>
+          </div>
+          <div class="video-meta">
+            <div class="video-title">Season Highlights</div>
+            <div class="video-desc">
+              Once Chase’s highlight reel is live, it will be embedded here for coaches and supporters
+              to watch.
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-wrap">
+            <div class="video-placeholder">
+              <div class="video-placeholder-icon">▶</div>
+              <span>No Game Film Uploaded</span>
+            </div>
+          </div>
+          <div class="video-meta">
+            <div class="video-title">Full Game Film</div>
+            <div class="video-desc">
+              Full-game footage will be added here as it becomes available to show how Chase impacts
+              the game on both ends.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-instructions reveal">
+        <h4>Future Film</h4>
+        <p>
+          When YouTube or Hudl links are ready, they can be embedded here using
+          <code>&lt;iframe&gt;</code> tags so coaches and supporters can easily view Chase’s film.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why-support">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Why Support</div>
+        <h2 class="section-title">Why Support Chase?</h2>
+      </div>
+
+      <div class="why-grid reveal">
+        <div>
+          <p>
+            Chase plays basketball year-round—high school season, travel ball, training, camps,
+            and leadership programs. That means constant investment: shoes, balls, uniforms,
+            equipment, training sessions, gym memberships, camp fees, tournament fees, travel,
+            food, and everything that comes with a growing teenager.
+          </p>
+          <p>
+            The 2026 summer travel league alone costs over $2,500, and that doesn’t include
+            food, protein, haircuts, clothes, or the cost of showing up to college visits and
+            camps he’s been invited to. Sponsorship isn’t just appreciated—it’s what makes it
+            possible for him to say “yes” to these opportunities.
+          </p>
+          <p>
+            Your support helps Chase build something bigger than a season: a foundation of
+            discipline, exposure, and experience that will follow him into college and beyond.
+          </p>
+        </div>
+
+        <div class="why-card">
+          <h3>What Your Support Covers</h3>
+          <ul>
+            <li>Summer travel league fees and tournament entry costs</li>
+            <li>Shoes, uniforms, basketballs, and training equipment</li>
+            <li>Monthly trainer fees and gym memberships</li>
+            <li>Camp fees, showcases, and leadership programs like FELC</li>
+            <li>Travel, gas, meals, and lodging for tournaments and visits</li>
+            <li>College visits and on-campus camp invitations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="donate">
+    <div class="container">
+      <div class="donate-grid">
+        <div class="reveal">
+          <div class="section-label">Support</div>
+          <h2 class="section-title light">Help Chase Compete</h2>
+
+          <p class="donate-why">
+            Travel basketball comes with real costs—tournament fees, travel, lodging, uniforms,
+            equipment, training, and more. Every contribution, big or small, helps Chase compete
+            against top competition, gain exposure, and continue growing as a player and person.
+          </p>
+
+          <div class="progress-wrap">
+            <div class="progress-header">
+              <div class="progress-raised">
+                <span>$</span><span id="raised-amount"></span>
+              </div>
+              <div class="progress-goal">
+                Goal: $<span id="goal-amount"></span>
+              </div>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progress-bar"></div>
+            </div>
+            <div class="progress-note">
+              Thank you to everyone who has already supported Chase’s journey.
+            </div>
+          </div>
+
+            <div class="tier">
+              <div class="tier-amount">$50</div>
+              <div class="tier-desc">Fuel &amp; — Pocket Change & Meals Supporter — covers snacks and small travel expenses for a tournament dayhelps with gas and meals for a weekend.</div>
+              <div class="tier-arrow">→</div>
+            </div>
+            <div class="tier">
+              <div class="tier-amount">$125</div>
+              <div class="tier-desc">Monthly Trainer Sponsorship — covers one full month of private training (April–July).</div>
+              <div class="tier-arrow">→</div>
+            </div>
+            <div class="tier">
+              <div class="tier-amount">$150</div>
+              <div class="tier-desc">Tournament Entry Sponsor — covers Chase’s entry fee for one summer tournament (7 total).</div>
+              <div class="tier-arrow">→</div>
+            </div>
+            <div class="tier">
+              <div class="tier-amount">$250</div>
+              <div class="tier-desc">Full Weekend Travel Sponsor — covers gas, meals, and travel for a full tournament weekend.</div>
+              <div class="tier-arrow">→</div>
+            </div>
+            <div class="tier">
+              <div class="tier-amount">$500</div>
+              <div class="tier-desc">Season Equipment & Essentials Sponsor — helps cover shoes, basketballs, compression gear, and other essentials, supports uniforms, warm-ups, and replacement gear throughout the year.</div>
+              <div class="tier-arrow">→</div>
+            </div>
+          </div>
+          
+	</div>
+         
+	 <div class="custom-amount">
+            <label for="customAmount" style="color:rgba(244,241,235,0.8); font-size:0.85rem;">
+              Or enter a custom amount:
+            </label>
+            <input type="number" id="customAmount" placeholder="Custom $" min="1" />
+            <button id="customDonateBtn">Donate</button>
+          </div>
+
+          <div class="sponsor-packages">
+            <div class="sponsor-card">
+              <h3>Silver Sponsor</h3>
+              <div class="sponsor-amount">$750</div>
+              <ul>
+                <li>Covers one full tournament weekend + one camp fee</li>
+                <li>Name listed on Chase’s website</li>
+                <li>Optional shout-out on social media</li>
+                <li>Recognition in the season “Thank You” section</li>
+              </ul>
+            </div>
+            <div class="sponsor-card">
+              <h3>Gold Sponsor</h3>
+              <div class="sponsor-amount">$1,500</div>
+              <ul>
+                <li>Covers two tournaments + two months of training</li>
+                <li>Logo or name featured on Chase’s website</li>
+                <li>Social media recognition</li>
+                <li>Optional logo on warm-up shirt</li>
+                <li>Priority updates on Chase’s season progress</li>
+              </ul>
+            </div>
+            <div class="sponsor-card">
+              <h3>Platinum Sponsor</h3>
+              <div class="sponsor-amount">$2,500+</div>
+              <ul>
+                <li>Matches full summer travel cost</li>
+                <li>Covers tournament fees, training, equipment, and travel support</li>
+                <li>Prominent logo placement on website</li>
+                <li>Featured “Thank You” highlight section</li>
+                <li>Optional business shout-out on social media</li>
+                <li>Personalized thank-you video from Chase</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="donate-cta">
+            <!-- Replace href with your real Venmo and Cash App links -->
+            <a class="btn-donate btn-venmo" id="venmoButton" href="https://venmo.com/" target="_blank" rel="noopener">
+              Donate via Venmo
+            </a>
+            <a class="btn-donate btn-cashapp" id="cashappButton" href="https://cash.app/" target="_blank" rel="noopener">
+              Donate via Cash App
+            </a>
+            <a class="btn-donate" style="background:#232F3E; color:#fff;" href="https://www.amazon.com/hz/wishlist" target="_blank" rel="noopener">
+              Amazon Wish List
+            </a>
+          </div>
+
+          <div class="qr-grid">
+            <div class="qr-card">
+              <h4>Venmo QR</h4>
+              <!-- Replace src with your Venmo QR image in the repo -->
+              <a href="https://venmo.com/" target="_blank" rel="noopener">
+                <img src="venmo-qr.png" alt="Venmo QR Code">
+              </a>
+              <p>Scan or tap to open Venmo with Chase’s info ready.</p>
+            </div>
+            <div class="qr-card">
+              <h4>Cash App QR</h4>
+              <!-- Replace src with your Cash App QR image in the repo -->
+              <a href="https://cash.app/" target="_blank" rel="noopener">
+                <img src="cashapp-qr.png" alt="Cash App QR Code">
+              </a>
+              <p>Scan or tap to open Cash App with Chase’s info ready.</p>
+            </div>
+          </div>
+
+          <p class="donate-disclaimer">
+            All funds go directly toward Chase’s basketball journey—travel, training, equipment,
+            camps, and college exposure opportunities. If you’d like to give in another way
+            (cash, check, or sponsorship), please reach out to his family directly. Thank you
+            for believing in his path.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="coach-contact">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">Coach Contact</h2>
+      </div>
+
+      <div class="coach-card reveal">
+        <h3>For Coaches &amp; Recruiters</h3>
+        <p><strong>High School:</strong> Mountain Island Charter</p>
+        <p><strong>Class:</strong> 2028</p>
+        <p><strong>Position:</strong> Power Forward / Small Forward</p>
+        <p><strong>Instagram:</strong> <a href="https://instagram.com/chaseenxtdoor" target="_blank" rel="noopener">@chaseenxtdoor</a></p>
+        <p><strong>Hudl:</strong> [NEED HUDL LINK]</p>
+        <p style="margin-top:0.8rem;">
+          For direct coach contact information, game film, or schedule details, please reach out
+          to Chase’s family or program staff. This page is designed to give a clear snapshot of
+          who he is—on and off the court.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-name">
+      Chase <span>Munir-Allston</span>
+    </div>
+    <div class="footer-tagline">
+      Mountain Island Charter • Class of 2028 • Power Forward / Small Forward • chasemunirallston.com
+    </div>
+
+    <div class="footer-social">
+      <a href="https://instagram.com/chaseenxtdoor" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">Hudl</a>
+    </div>
+
+    <div class="footer-disclaimer">
+      This page was created to support Chase’s year-round basketball journey and 2026 summer travel league.
+      Stats, schedule, and details will be updated as the season progresses. Custom domain:
+      chasemunirallston.com (in progress or configured via DNS and GitHub Pages).
+    </div>
+  </footer>
+
+  <script>
+    // Progress bar
+    (function() {
+      const styles = getComputedStyle(document.documentElement);
+      const raised = parseFloat(styles.getPropertyValue('--raised')) || 0;
+      const goal   = parseFloat(styles.getPropertyValue('--goal')) || 1;
+
+      const raisedEl = document.getElementById('raised-amount');
+      const goalEl   = document.getElementById('goal-amount');
+      const barEl    = document.getElementById('progress-bar');
+
+      if (raisedEl) raisedEl.textContent = raised.toLocaleString();
+      if (goalEl)   goalEl.textContent   = goal.toLocaleString();
+
+      const pct = Math.min(100, Math.max(0, (raised / goal) * 100));
+      requestAnimationFrame(() => {
+        if (barEl) barEl.style.width = pct + '%';
+      });
+    })();
+
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Carousel
+    const track = document.querySelector('.carousel-track');
+    const slides = track ? Array.from(track.children) : [];
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    let index = 0;
+
+    function updateCarousel() {
+      if (!slides.length) return;
+      const width = slides[0].getBoundingClientRect().width;
+      track.style.transform = `translateX(-${index * width}px)`;
+    }
+
+    if (nextBtn && prevBtn && slides.length) {
+      nextBtn.addEventListener('click', () => {
+        index = (index + 1) % slides.length;
+        updateCarousel();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        index = (index - 1 + slides.length) % slides.length;
+        updateCarousel();
+      });
+
+      window.addEventListener('resize', updateCarousel);
+    }
+
+    // Custom amount buttons (open Venmo/Cash App with amount if you later add deep links)
+    const customInput = document.getElementById('customAmount');
+    const customBtn = document.getElementById('customDonateBtn');
+    const venmoBtn = document.getElementById('venmoButton');
+    const cashappBtn = document.getElementById('cashappButton');
+
+    if (customBtn && customInput) {
+      customBtn.addEventListener('click', () => {
+        const amount = parseFloat(customInput.value);
+        if (!amount || amount <= 0) {
+          alert('Please enter a valid amount.');
+          return;
+        }
+        // For now, just scroll to Venmo/Cash App buttons.
+        // Later, you can build deep links like:
+        // venmo://paycharge?txn=pay&recipients=USERNAME&amount=AMOUNT
+        venmoBtn?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    }
+  </script>
+</body>
+</html>
