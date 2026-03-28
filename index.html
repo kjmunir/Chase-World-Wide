@@ -1271,39 +1271,93 @@
     </div>
   </section>
 
-  <section id="photos">
-    <div class="container reveal">
-      <div class="section-label">Gallery</div>
-      <h2 class="section-title">Season Photos</h2>
+ <section id="photos">
+  <div class="container reveal">
+    <div class="section-label">Gallery</div>
+    <h2 class="section-title">Season Photos</h2>
 
-      <div class="carousel">
-        <div class="carousel-track">
-          <!-- Replace these src values with the actual filenames you uploaded -->
-          <img src="Photo Dec 02 2025, 5 32 24 AM.jpg">
-          <img src="Photo Dec 02 2025, 5 37 43 AM.jpg">
-  	  <img src="Photo Dec 02 2025, 5 32 24 AM.jpg">
-	  <img src="Photo Dec 02 2025, 5 33 54 AM.jpg">
-	  <img src="Photo Dec 02 2025, 5 37 43 AM.jpg">
-	  <img src="Photo Feb 13 2026, 5 39 03 AM.jpg">
-	  <img src="Photo Feb 13 2026, 5 40 07 AM.jpg">
-	  <img src="Photo Jan 17 2026, 1 14 24 PM.jpg">
-	  <img src="Photo Jan 17 2026, 1 14 42 PM.jpg">
-	  <img src="Photo Jan 17 2026, 1 14 53 PM.jpg">
-	  <img src="Photo Jan 17 2026, 1 15 10 PM.jpg">
- 	  <img src="Photo Jan 23 2026, 5 10 22 AM.jpg">
-	  <img src="Photo Jan 23 2026, 5 10 21 AM.jpg">
-	  <img src="Photo Jan 23 2026, 5 20 54 AM.jpg">
-	  <img src="Photo Jan 23 2026, 5 32 18 AM.jpg">
-	  <img src="Photo Jan 23 2026, 5 47 16 AM.jpg">
-        </div>
-      </div>
-
-      <div class="carousel-buttons">
-        <button id="prevBtn">‹</button>
-        <button id="nextBtn">›</button>
+    <div class="carousel">
+      <div class="carousel-track">
+        <img src="Photo%20Dec%2002%202025%2C%205%2032%2024%20AM.jpg">
+        <img src="Photo%20Dec%2002%202025%2C%205%2037%2043%20AM.jpg">
+        <img src="Photo%20Dec%2002%202025%2C%205%2033%2054%20AM.jpg">
+        <img src="Photo%20Feb%2013%202026%2C%205%2039%2003%20AM.jpg">
+        <img src="Photo%20Feb%2013%202026%2C%205%2040%2007%20AM.jpg">
+        <img src="Photo%20Jan%2017%202026%2C%201%2014%2024%20PM.jpg">
+        <img src="Photo%20Jan%2017%202026%2C%201%2014%2042%20PM.jpg">
+        <img src="Photo%20Jan%2017%202026%2C%201%2014%2053%20PM.jpg">
+        <img src="Photo%20Jan%2017%202026%2C%201%2015%2010%20PM.jpg">
+        <img src="Photo%20Jan%2023%202026%2C%205%2010%2022%20AM.jpg">
+        <img src="Photo%20Jan%2023%202026%2C%205%2010%2021%20AM.jpg">
+        <img src="Photo%20Jan%2023%202026%2C%205%2020%2054%20AM.jpg">
+        <img src="Photo%20Jan%2023%202026%2C%205%2032%2018%20AM.jpg">
+        <img src="Photo%20Jan%2023%202026%2C%205%2047%2016%20AM.jpg">
       </div>
     </div>
-  </section>
+
+    <div class="carousel-buttons">
+      <button id="prevBtn">‹</button>
+      <button id="nextBtn">›</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  .carousel-track img {
+    min-width: 100%;
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    object-position: center top;
+    flex-shrink: 0;
+    border-radius: 8px;
+  }
+</style>
+
+<script>
+  const track   = document.querySelector('.carousel-track');
+  const imgs    = track.querySelectorAll('img');
+  const total   = imgs.length;
+  let current   = 0;
+  let autoPlay;
+
+  function goTo(index) {
+    current = (index + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    goTo(current - 1);
+    resetAutoPlay();
+  });
+
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    goTo(current + 1);
+    resetAutoPlay();
+  });
+
+  function startAutoPlay() {
+    autoPlay = setInterval(() => goTo(current + 1), 4000);
+  }
+
+  function resetAutoPlay() {
+    clearInterval(autoPlay);
+    startAutoPlay();
+  }
+
+  startAutoPlay();
+</script>
 
   <section id="schedule">
     <div class="container">
