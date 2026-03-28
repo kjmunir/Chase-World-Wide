@@ -234,23 +234,6 @@
       border-radius: 4px;
       display: block;
     }
-    .bio-photo-placeholder {
-      width: 100%;
-      aspect-ratio: 3/4;
-      background: linear-gradient(135deg, var(--navy-mid) 0%, #1e3a5f 100%);
-      border-radius: 4px;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 1rem;
-    }
-    .bio-photo-placeholder svg { opacity: 0.3; }
-    .bio-photo-placeholder span {
-      font-family: var(--display);
-      font-weight: 600;
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(244,241,235,0.4);
-    }
     .bio-accent {
       position: absolute;
       bottom: -16px; right: -16px;
@@ -412,7 +395,6 @@
       font-style: normal;
     }
 
-    /* Season Stats Chart */
     .stats-chart {
       margin-top: 3rem;
       background: #f0ece3;
@@ -450,23 +432,29 @@
     /* Photo Carousel */
     #photos { background: var(--white); }
     .carousel {
-      position: relative;
+      width: 100%;
       overflow: hidden;
+      position: relative;
       border-radius: 8px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.15);
       margin-top: 2rem;
     }
     .carousel-track {
       display: flex;
-      transition: transform 0.4s ease;
+      transition: transform 0.5s ease;
     }
     .carousel-track img {
+      min-width: 100%;
       width: 100%;
-      flex-shrink: 0;
-      object-fit: cover;
       height: auto;
+      max-height: 80vh;
+      object-fit: contain;
+      flex-shrink: 0;
       border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
     }
+    .carousel-track img:hover { opacity: 0.85; }
     .carousel-buttons {
       display: flex;
       justify-content: center;
@@ -484,9 +472,49 @@
       font-weight: bold;
       transition: background 0.2s;
     }
-    .carousel-buttons button:hover {
-      background: var(--gold);
+    .carousel-buttons button:hover { background: var(--gold); }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
     }
+    #lightbox.active { display: flex; }
+    #lightbox-img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+    #lightbox-close {
+      position: fixed;
+      top: 20px; right: 28px;
+      background: none; border: none;
+      color: white; font-size: 2rem;
+      cursor: pointer; opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    #lightbox-close:hover { opacity: 1; }
+    #lightbox-prev,
+    #lightbox-next {
+      position: fixed;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      border: none; color: white;
+      font-size: 2.5rem; padding: 12px 18px;
+      cursor: pointer; border-radius: 4px;
+      transition: background 0.2s;
+    }
+    #lightbox-prev { left: 16px; }
+    #lightbox-next { right: 16px; }
+    #lightbox-prev:hover,
+    #lightbox-next:hover { background: rgba(255,255,255,0.3); }
 
     #schedule { background: var(--navy); }
     .schedule-table-wrap {
@@ -500,9 +528,7 @@
       border-collapse: collapse;
       font-size: 0.97rem;
     }
-    .schedule-table thead {
-      background: rgba(245,166,35,0.12);
-    }
+    .schedule-table thead { background: rgba(245,166,35,0.12); }
     .schedule-table thead th {
       font-family: var(--display);
       font-weight: 700;
@@ -517,9 +543,7 @@
       border-top: 1px solid rgba(255,255,255,0.06);
       transition: background 0.2s;
     }
-    .schedule-table tbody tr:hover {
-      background: rgba(245,166,35,0.05);
-    }
+    .schedule-table tbody tr:hover { background: rgba(245,166,35,0.05); }
     .schedule-table tbody td {
       padding: 1.1rem 1.5rem;
       color: rgba(244,241,235,0.85);
@@ -532,14 +556,8 @@
       color: var(--white);
       white-space: nowrap;
     }
-    .schedule-table .td-name {
-      font-weight: 600;
-      color: var(--white);
-    }
-    .schedule-table .td-location {
-      color: var(--gray);
-      font-size: 0.9rem;
-    }
+    .schedule-table .td-name { font-weight: 600; color: var(--white); }
+    .schedule-table .td-location { color: var(--gray); font-size: 0.9rem; }
     .status-badge {
       display: inline-block;
       font-family: var(--display);
@@ -625,9 +643,7 @@
       text-transform: uppercase;
       color: rgba(244,241,235,0.4);
     }
-    .video-meta {
-      padding: 1.2rem 1.5rem;
-    }
+    .video-meta { padding: 1.2rem 1.5rem; }
     .video-title {
       font-family: var(--display);
       font-weight: 700;
@@ -635,11 +651,7 @@
       color: var(--white);
       margin-bottom: 0.3rem;
     }
-    .video-desc {
-      font-size: 0.85rem;
-      color: var(--gray);
-      line-height: 1.5;
-    }
+    .video-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.5; }
     .video-instructions {
       margin-top: 2rem;
       background: #f0ece3;
@@ -731,11 +743,7 @@
       transition: width 1.5s ease;
       width: 0%;
     }
-    .progress-note {
-      font-size: 0.85rem;
-      color: var(--gray);
-      margin-top: 0.5rem;
-    }
+    .progress-note { font-size: 0.85rem; color: var(--gray); margin-top: 0.5rem; }
     .tiers { display: flex; flex-direction: column; gap: 1rem; }
     .tier {
       display: flex;
@@ -766,11 +774,7 @@
       flex: 1;
       padding: 0 1.5rem;
     }
-    .tier-arrow {
-      color: var(--gold);
-      font-size: 1.2rem;
-      transition: transform 0.2s;
-    }
+    .tier-arrow { color: var(--gold); font-size: 1.2rem; transition: transform 0.2s; }
     .tier:hover .tier-arrow { transform: translateX(4px); }
 
     .donate-cta {
@@ -792,10 +796,10 @@
       text-decoration: none;
       transition: all 0.25s;
     }
-    .btn-venmo  { background: #3D95CE; color: #fff; }
-    .btn-cashapp{ background: #00D632; color: #000; }
-    .btn-venmo:hover  { background: #2a80b9; transform: translateY(-2px); }
-    .btn-cashapp:hover{ background: #00bc2c; transform: translateY(-2px); }
+    .btn-venmo   { background: #3D95CE; color: #fff; }
+    .btn-cashapp { background: #00D632; color: #000; }
+    .btn-venmo:hover   { background: #2a80b9; transform: translateY(-2px); }
+    .btn-cashapp:hover { background: #00bc2c; transform: translateY(-2px); }
 
     .custom-amount {
       margin-top: 1.5rem;
@@ -825,10 +829,7 @@
       cursor: pointer;
       transition: background 0.2s, transform 0.2s;
     }
-    .custom-amount button:hover {
-      background: var(--gold-lt);
-      transform: translateY(-2px);
-    }
+    .custom-amount button:hover { background: var(--gold-lt); transform: translateY(-2px); }
 
     .donate-disclaimer {
       font-size: 0.8rem;
@@ -837,7 +838,6 @@
       line-height: 1.6;
     }
 
-    /* QR Grid */
     .qr-grid {
       margin-top: 2rem;
       display: grid;
@@ -860,72 +860,15 @@
       color: var(--gold);
       margin-bottom: 0.75rem;
     }
-    .qr-card a {
-      display: inline-block;
-      text-decoration: none;
-      color: inherit;
-    }
+    .qr-card a { display: inline-block; text-decoration: none; color: inherit; }
     .qr-card img {
-      width: 120px;
-      height: 120px;
+      width: 120px; height: 120px;
       object-fit: contain;
       border-radius: 8px;
       background: #fff;
     }
-    .qr-card p {
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
-      color: rgba(244,241,235,0.8);
-    }
+    .qr-card p { margin-top: 0.5rem; font-size: 0.8rem; color: rgba(244,241,235,0.8); }
 
-    /* Why Support */
-    #why-support { background: #f0ece3; }
-    .why-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 2.5rem;
-      align-items: start;
-    }
-    .why-grid p {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: #3a4a5c;
-      margin-bottom: 1rem;
-    }
-    .why-card {
-      background: #ffffff;
-      border-radius: 8px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
-    .why-card h3 {
-      font-family: var(--display);
-      font-weight: 800;
-      font-size: 1.1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--navy-mid);
-      margin-bottom: 0.75rem;
-    }
-    .why-card ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    .why-card li {
-      font-size: 0.95rem;
-      margin-bottom: 0.5rem;
-      padding-left: 1.1rem;
-      position: relative;
-      color: #3a4a5c;
-    }
-    .why-card li::before {
-      content: '▸';
-      position: absolute;
-      left: 0;
-      color: var(--gold);
-    }
-
-    /* Sponsorship Packages */
     .sponsor-packages {
       margin-top: 3rem;
       display: grid;
@@ -960,24 +903,44 @@
       font-size: 0.9rem;
       color: rgba(244,241,235,0.8);
     }
-    .sponsor-card ul li {
-      margin-bottom: 0.4rem;
-      position: relative;
-    }
-    .sponsor-card ul li::before {
-      content: '•';
-      position: absolute;
-      left: -0.8rem;
-      color: var(--gold);
-    }
+    .sponsor-card ul li { margin-bottom: 0.4rem; position: relative; }
+    .sponsor-card ul li::before { content: '•'; position: absolute; left: -0.8rem; color: var(--gold); }
 
-    /* Coach Contact */
-    #coach-contact { background: var(--white); }
-    .coach-card {
-      background: #f0ece3;
-      border-radius: 8px;
-      padding: 1.8rem;
+    #why-support { background: #f0ece3; }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
     }
+    .why-grid p { font-size: 1rem; line-height: 1.8; color: #3a4a5c; margin-bottom: 1rem; }
+    .why-card {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .why-card h3 {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--navy-mid);
+      margin-bottom: 0.75rem;
+    }
+    .why-card ul { list-style: none; padding-left: 0; }
+    .why-card li {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      padding-left: 1.1rem;
+      position: relative;
+      color: #3a4a5c;
+    }
+    .why-card li::before { content: '▸'; position: absolute; left: 0; color: var(--gold); }
+
+    #coach-contact { background: var(--white); }
+    .coach-card { background: #f0ece3; border-radius: 8px; padding: 1.8rem; }
     .coach-card h3 {
       font-family: var(--display);
       font-weight: 800;
@@ -987,11 +950,7 @@
       color: var(--navy-mid);
       margin-bottom: 0.75rem;
     }
-    .coach-card p {
-      font-size: 0.95rem;
-      color: #3a4a5c;
-      margin-bottom: 0.4rem;
-    }
+    .coach-card p { font-size: 0.95rem; color: #3a4a5c; margin-bottom: 0.4rem; }
 
     footer {
       background: var(--navy);
@@ -1009,17 +968,8 @@
       margin-bottom: 0.5rem;
     }
     .footer-name span { color: var(--sky); }
-    .footer-tagline {
-      font-size: 0.9rem;
-      color: var(--gray);
-      margin-bottom: 1.5rem;
-    }
-    .footer-social {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
+    .footer-tagline { font-size: 0.9rem; color: var(--gray); margin-bottom: 1.5rem; }
+    .footer-social { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; }
     .footer-social a {
       font-family: var(--display);
       font-weight: 700;
@@ -1074,24 +1024,16 @@
     <div class="court-bg"></div>
     <div class="hero-orb orb1"></div>
     <div class="hero-orb orb2"></div>
-
     <div class="hero-content">
       <div class="hero-eyebrow">🏀 2026 Summer Travel League — Fundraiser</div>
-
       <h1 class="hero-name">Chase<br><span>Munir-Allston</span></h1>
-
-      <div class="hero-sub">
-        Mountain Island Charter • Class of 2028 • Power Forward / Small Forward
-      </div>
-
+      <div class="hero-sub">Mountain Island Charter • Class of 2028 • Power Forward / Small Forward</div>
       <p class="hero-mission">
         Chase is a 15-year-old sophomore with real college basketball ambitions—playing year-round,
         training, traveling, and building a foundation that goes far beyond the game. This 2026
         travel season is a key step in that journey, and your support helps make it possible.
       </p>
-
-      <a href="#donate" class="btn-primary">Support Chase’s Journey</a>
-
+      <a href="#donate" class="btn-primary">Support Chase's Journey</a>
       <div class="scroll-indicator">
         <span>Scroll to learn more</span>
         <div class="scroll-line"></div>
@@ -1099,39 +1041,38 @@
     </div>
   </section>
 
-<section id="bio">
-  <div class="container">
-    <div class="bio-grid reveal">
-      <div class="bio-photo-wrap">
-        <!-- Filename with spaces needs to be URL-encoded -->
-        <img class="bio-photo" src="Photo%20Jan%2017%202026%2C%201%2014%2024%20PM.jpg" alt="Chase Munir-Allston" />
-        <div class="bio-accent"></div>
-      </div>
-      <div class="bio-text">
-        <div class="section-label">About Me</div>
-        <h2 class="section-title">Meet Chase Munir-Allston</h2>
-        <p>
-          Chase is a 15-year-old sophomore at Mountain Island Charter—chill, low-drama, suburban,
-          and discerning. He keeps a small circle, values peace, and lets his work on the court
-          speak for itself. Basketball isn't just something he does; it's the lane he's chosen
-          to pursue seriously, with genuine college athletic ambitions.
-        </p>
-        <p>
-          On the floor, Chase plays both power forward and small forward. He's an
-          <strong>explosive rebounder</strong>, has a <strong>high defensive IQ</strong>, and is a
-          <strong>strong finisher at the rim</strong>. He loves setting up teammates, doing the
-          little things that don't always show up in the box score, and making winning plays.
-        </p>
-        <p>
-          Off the court, Chase is just as intentional. He's enrolled in the Gaston College dual
-          enrollment program, putting him on track to graduate high school with an associate's
-          degree in Cyber Security by age 17. That means he'll enter college academically ahead,
-          with full athletic eligibility and less pressure than most incoming freshmen.
-        </p>
+  <section id="bio">
+    <div class="container">
+      <div class="bio-grid reveal">
+        <div class="bio-photo-wrap">
+          <img class="bio-photo" src="Photo%20Jan%2017%202026%2C%201%2014%2024%20PM.jpg" alt="Chase Munir-Allston" />
+          <div class="bio-accent"></div>
+        </div>
+        <div class="bio-text">
+          <div class="section-label">About Me</div>
+          <h2 class="section-title">Meet Chase Munir-Allston</h2>
+          <p>
+            Chase is a 15-year-old sophomore at Mountain Island Charter—chill, low-drama, suburban,
+            and discerning. He keeps a small circle, values peace, and lets his work on the court
+            speak for itself. Basketball isn't just something he does; it's the lane he's chosen
+            to pursue seriously, with genuine college athletic ambitions.
+          </p>
+          <p>
+            On the floor, Chase plays both power forward and small forward. He's an
+            <strong>explosive rebounder</strong>, has a <strong>high defensive IQ</strong>, and is a
+            <strong>strong finisher at the rim</strong>. He loves setting up teammates, doing the
+            little things that don't always show up in the box score, and making winning plays.
+          </p>
+          <p>
+            Off the court, Chase is just as intentional. He's enrolled in the Gaston College dual
+            enrollment program, putting him on track to graduate high school with an associate's
+            degree in Cyber Security by age 17. That means he'll enter college academically ahead,
+            with full athletic eligibility and less pressure than most incoming freshmen.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <section id="academics">
     <div class="container">
@@ -1139,7 +1080,6 @@
         <div class="section-label">Academics</div>
         <h2 class="section-title light">Student First,<br>Athlete Always</h2>
       </div>
-
       <div class="academics-grid reveal">
         <div class="academic-card">
           <div class="academic-card-label">Current GPA</div>
@@ -1148,39 +1088,25 @@
             Mountain Island Charter — Dual Enrollment with Gaston College
           </p>
         </div>
-
         <div class="academic-card">
           <div class="academic-card-label">Junior &amp; Senior Year</div>
           <h4>Dual Enrollment &amp; Cyber Security</h4>
           <ul>
             <li>Enrolled in Gaston College dual enrollment program</li>
-            <li>On track to graduate high school with an Associate’s Degree in Cyber Security</li>
+            <li>On track to graduate high school with an Associate's Degree in Cyber Security</li>
             <li>Class of 2028 — graduating at 17 with college credits</li>
             <li>Maintaining strong academic performance while playing year-round basketball</li>
             <li>Building a foundation for both tech and athletics after high school</li>
           </ul>
         </div>
-
         <div class="academic-card">
           <div class="academic-card-label">College Plans</div>
           <h4>Looking Ahead</h4>
           <ul>
-            <li>
-              Exploring the full range of college athletics—from high-level competition
-              to smaller, relational programs.
-            </li>
-            <li>
-              Enters college academically ahead, potentially with sophomore standing,
-              full athletic eligibility intact.
-            </li>
-            <li>
-              Best fit (for now): calmer, smaller environments with relational coaches
-              and low drama, where he’ll actually be seen.
-            </li>
-            <li>
-              The big picture: build grades, film, fitness, and character so when the
-              right opportunity shows up, he’s ready. No door is closed.
-            </li>
+            <li>Exploring the full range of college athletics—from high-level competition to smaller, relational programs.</li>
+            <li>Enters college academically ahead, potentially with sophomore standing, full athletic eligibility intact.</li>
+            <li>Best fit (for now): calmer, smaller environments with relational coaches and low drama, where he'll actually be seen.</li>
+            <li>The big picture: build grades, film, fitness, and character so when the right opportunity shows up, he's ready. No door is closed.</li>
           </ul>
         </div>
       </div>
@@ -1196,169 +1122,87 @@
         </div>
         <div class="season-badge">2025–2026 Season</div>
       </div>
-
       <div class="stats-row reveal">
         <div class="stat-card">
           <div class="stat-value">135</div>
           <div class="stat-label">Total Points</div>
         </div>
-
         <div class="stat-card">
           <div class="stat-value">72</div>
           <div class="stat-label">Total Assists</div>
         </div>
-
         <div class="stat-card">
           <div class="stat-value">133</div>
           <div class="stat-label">Total Rebounds</div>
         </div>
-
         <div class="stat-card">
           <div class="stat-value">10<sup>W</sup></div>
           <div class="stat-label">Team Record (10–9)</div>
         </div>
       </div>
-
       <div class="stats-chart reveal">
         <h3>2025–2026 Season Stats Overview</h3>
         <table>
           <thead>
-            <tr>
-              <th>Category</th>
-              <th>Stat</th>
-              <th>Notes</th>
-            </tr>
+            <tr><th>Category</th><th>Stat</th><th>Notes</th></tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Total Points</td>
-              <td>135</td>
-              <td>Scored across the 2025–2026 high school season as team captain.</td>
-            </tr>
-            <tr>
-              <td>Total Assists</td>
-              <td>72</td>
-              <td>Unselfish playmaker who loves setting up teammates.</td>
-            </tr>
-            <tr>
-              <td>Total Rebounds</td>
-              <td>133</td>
-              <td>Explosive rebounder, especially on the defensive glass.</td>
-            </tr>
-            <tr>
-              <td>Team Record</td>
-              <td>10–9</td>
-              <td>Winning season with Chase serving as team captain.</td>
-            </tr>
+            <tr><td>Total Points</td><td>135</td><td>Scored across the 2025–2026 high school season as team captain.</td></tr>
+            <tr><td>Total Assists</td><td>72</td><td>Unselfish playmaker who loves setting up teammates.</td></tr>
+            <tr><td>Total Rebounds</td><td>133</td><td>Explosive rebounder, especially on the defensive glass.</td></tr>
+            <tr><td>Team Record</td><td>10–9</td><td>Winning season with Chase serving as team captain.</td></tr>
           </tbody>
         </table>
       </div>
-
       <div class="highlights-quotes reveal">
         <div class="quote-card">
-          <blockquote>
-            "[ADD TESTIMONIALS AND LINK FROM THE ACCOLADES HE RECEIVED ONLINE FOR HIS SEASON]"
-          </blockquote>
+          <blockquote>"[ADD TESTIMONIALS AND LINK FROM THE ACCOLADES HE RECEIVED ONLINE FOR HIS SEASON]"</blockquote>
           <cite>— Coach / Program Recognition</cite>
         </div>
-
         <div class="quote-card">
-          <blockquote>
-            "[WHAT WAS YOUR FAVORITE MOMENT OF THE SEASON?]"
-          </blockquote>
+          <blockquote>"[WHAT WAS YOUR FAVORITE MOMENT OF THE SEASON?]"</blockquote>
           <cite>— Chase Munir-Allston</cite>
         </div>
       </div>
     </div>
   </section>
 
- <section id="photos">
-  <div class="container reveal">
-    <div class="section-label">Gallery</div>
-    <h2 class="section-title">Season Photos</h2>
-
-    <div class="carousel">
-      <div class="carousel-track">
-        <img src="Photo%20Dec%2002%202025%2C%205%2032%2024%20AM.jpg">
-        <img src="Photo%20Dec%2002%202025%2C%205%2037%2043%20AM.jpg">
-        <img src="Photo%20Dec%2002%202025%2C%205%2033%2054%20AM.jpg">
-        <img src="Photo%20Feb%2013%202026%2C%205%2039%2003%20AM.jpg">
-        <img src="Photo%20Feb%2013%202026%2C%205%2040%2007%20AM.jpg">
-        <img src="Photo%20Jan%2017%202026%2C%201%2014%2024%20PM.jpg">
-        <img src="Photo%20Jan%2017%202026%2C%201%2014%2042%20PM.jpg">
-        <img src="Photo%20Jan%2017%202026%2C%201%2014%2053%20PM.jpg">
-        <img src="Photo%20Jan%2017%202026%2C%201%2015%2010%20PM.jpg">
-        <img src="Photo%20Jan%2023%202026%2C%205%2010%2022%20AM.jpg">
-        <img src="Photo%20Jan%2023%202026%2C%205%2010%2021%20AM.jpg">
-        <img src="Photo%20Jan%2023%202026%2C%205%2020%2054%20AM.jpg">
-        <img src="Photo%20Jan%2023%202026%2C%205%2032%2018%20AM.jpg">
-        <img src="Photo%20Jan%2023%202026%2C%205%2047%2016%20AM.jpg">
+  <section id="photos">
+    <div class="container reveal">
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">Season Photos</h2>
+      <div class="carousel">
+        <div class="carousel-track">
+          <img src="Photo%20Dec%2002%202025%2C%205%2032%2024%20AM.jpg">
+          <img src="Photo%20Dec%2002%202025%2C%205%2037%2043%20AM.jpg">
+          <img src="Photo%20Dec%2002%202025%2C%205%2033%2054%20AM.jpg">
+          <img src="Photo%20Feb%2013%202026%2C%205%2039%2003%20AM.jpg">
+          <img src="Photo%20Feb%2013%202026%2C%205%2040%2007%20AM.jpg">
+          <img src="Photo%20Jan%2017%202026%2C%201%2014%2024%20PM.jpg">
+          <img src="Photo%20Jan%2017%202026%2C%201%2014%2042%20PM.jpg">
+          <img src="Photo%20Jan%2017%202026%2C%201%2014%2053%20PM.jpg">
+          <img src="Photo%20Jan%2017%202026%2C%201%2015%2010%20PM.jpg">
+          <img src="Photo%20Jan%2023%202026%2C%205%2010%2022%20AM.jpg">
+          <img src="Photo%20Jan%2023%202026%2C%205%2010%2021%20AM.jpg">
+          <img src="Photo%20Jan%2023%202026%2C%205%2020%2054%20AM.jpg">
+          <img src="Photo%20Jan%2023%202026%2C%205%2032%2018%20AM.jpg">
+          <img src="Photo%20Jan%2023%202026%2C%205%2047%2016%20AM.jpg">
+        </div>
+      </div>
+      <div class="carousel-buttons">
+        <button id="prevBtn">‹</button>
+        <button id="nextBtn">›</button>
       </div>
     </div>
+  </section>
 
-    <div class="carousel-buttons">
-      <button id="prevBtn">‹</button>
-      <button id="nextBtn">›</button>
-    </div>
+  <!-- Lightbox overlay -->
+  <div id="lightbox">
+    <button id="lightbox-close">✕</button>
+    <button id="lightbox-prev">‹</button>
+    <img id="lightbox-img" src="" alt="">
+    <button id="lightbox-next">›</button>
   </div>
-</section>
-
-<style>
-  .carousel {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .carousel-track {
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-
-  .carousel-track img {
-    min-width: 100%;
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-    object-position: center top;
-    flex-shrink: 0;
-    border-radius: 8px;
-  }
-</style>
-
-<script>
-  const track   = document.querySelector('.carousel-track');
-  const imgs    = track.querySelectorAll('img');
-  const total   = imgs.length;
-  let current   = 0;
-  let autoPlay;
-
-  function goTo(index) {
-    current = (index + total) % total;
-    track.style.transform = `translateX(-${current * 100}%)`;
-  }
-
-  document.getElementById('prevBtn').addEventListener('click', () => {
-    goTo(current - 1);
-    resetAutoPlay();
-  });
-
-  document.getElementById('nextBtn').addEventListener('click', () => {
-    goTo(current + 1);
-    resetAutoPlay();
-  });
-
-  function startAutoPlay() {
-    autoPlay = setInterval(() => goTo(current + 1), 4000);
-  }
-
-  function resetAutoPlay() {
-    clearInterval(autoPlay);
-    startAutoPlay();
-  }
-
-  startAutoPlay();
-</script>
 
   <section id="schedule">
     <div class="container">
@@ -1366,15 +1210,11 @@
         <div class="section-label">On The Road</div>
         <h2 class="section-title light">2026 Travel League Schedule</h2>
       </div>
-
       <div class="schedule-table-wrap reveal">
         <table class="schedule-table">
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Tournament</th>
-              <th>Location</th>
-              <th>Status</th>
+              <th>Date</th><th>Tournament</th><th>Location</th><th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -1429,64 +1269,52 @@
           </tbody>
         </table>
       </div>
+      <p class="schedule-note reveal">Schedule subject to change based on team placement, invitations, and bracket results.</p>
+    </div>
+  </section>
 
-      <p class="schedule-note reveal">
-        Schedule subject to change based on team placement, invitations, and bracket results.
+ <section id="videos">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Film Room</div>
+      <h2 class="section-title">Video Highlights</h2>
+    </div>
+    <div class="videos-grid reveal">
+      <div class="video-card">
+        <div class="video-wrap">
+  <img src="Photo%20Jan%2023%202026%2C%205%2047%2016%20AM.jpg" 
+       style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;">
+</div>
+        <div class="video-meta">
+          <div class="video-title">Season Highlights</div>
+          <div class="video-desc">Chase's 2025–2026 season highlight reel.</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-wrap">
+          <div class="video-placeholder">
+            <div class="video-placeholder-icon">▶</div>
+            <span>No Game Film Uploaded</span>
+          </div>
+        </div>
+        <div class="video-meta">
+          <div class="video-title">Full Game Film</div>
+          <div class="video-desc">
+            Full-game footage will be added here as it becomes available to show how Chase impacts
+            the game on both ends.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="video-instructions reveal">
+      <h4>Future Film</h4>
+      <p>
+        When additional YouTube or Hudl links are ready, they can be embedded here using
+        <code>&lt;iframe&gt;</code> tags so coaches and supporters can easily view Chase's film.
       </p>
     </div>
-  </section>
-
-  <section id="videos">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-label">Film Room</div>
-        <h2 class="section-title">Video Highlights</h2>
-      </div>
-
-      <div class="videos-grid reveal">
-        <div class="video-card">
-          <div class="video-wrap">
-            <!-- No YouTube yet — placeholder only -->
-            <div class="video-placeholder">
-              <div class="video-placeholder-icon">▶</div>
-              <span>No YouTube Highlights Yet</span>
-            </div>
-          </div>
-          <div class="video-meta">
-            <div class="video-title">Season Highlights</div>
-            <div class="video-desc">
-              Once Chase’s highlight reel is live, it will be embedded here for coaches and supporters
-              to watch.
-            </div>
-          </div>
-        </div>
-
-        <div class="video-card">
-          <div class="video-wrap">
-            <div class="video-placeholder">
-              <div class="video-placeholder-icon">▶</div>
-              <span>No Game Film Uploaded</span>
-            </div>
-          </div>
-          <div class="video-meta">
-            <div class="video-title">Full Game Film</div>
-            <div class="video-desc">
-              Full-game footage will be added here as it becomes available to show how Chase impacts
-              the game on both ends.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="video-instructions reveal">
-        <h4>Future Film</h4>
-        <p>
-          When YouTube or Hudl links are ready, they can be embedded here using
-          <code>&lt;iframe&gt;</code> tags so coaches and supporters can easily view Chase’s film.
-        </p>
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 
   <section id="why-support">
     <div class="container">
@@ -1494,27 +1322,12 @@
         <div class="section-label">Why Support</div>
         <h2 class="section-title">Why Support Chase?</h2>
       </div>
-
       <div class="why-grid reveal">
         <div>
-          <p>
-            Chase plays basketball year-round—high school season, travel ball, training, camps,
-            and leadership programs. That means constant investment: shoes, balls, uniforms,
-            equipment, training sessions, gym memberships, camp fees, tournament fees, travel,
-            food, and everything that comes with a growing teenager.
-          </p>
-          <p>
-            The 2026 summer travel league alone costs over $2,500, and that doesn’t include
-            food, protein, haircuts, clothes, or the cost of showing up to college visits and
-            camps he’s been invited to. Sponsorship isn’t just appreciated—it’s what makes it
-            possible for him to say “yes” to these opportunities.
-          </p>
-          <p>
-            Your support helps Chase build something bigger than a season: a foundation of
-            discipline, exposure, and experience that will follow him into college and beyond.
-          </p>
+          <p>Chase plays basketball year-round—high school season, travel ball, training, camps, and leadership programs. That means constant investment: shoes, balls, uniforms, equipment, training sessions, gym memberships, camp fees, tournament fees, travel, food, and everything that comes with a growing teenager.</p>
+          <p>The 2026 summer travel league alone costs over $2,500, and that doesn't include food, protein, haircuts, clothes, or the cost of showing up to college visits and camps he's been invited to. Sponsorship isn't just appreciated—it's what makes it possible for him to say "yes" to these opportunities.</p>
+          <p>Your support helps Chase build something bigger than a season: a foundation of discipline, exposure, and experience that will follow him into college and beyond.</p>
         </div>
-
         <div class="why-card">
           <h3>What Your Support Covers</h3>
           <ul>
@@ -1533,36 +1346,29 @@
   <section id="donate">
     <div class="container">
       <div class="donate-grid">
+
         <div class="reveal">
           <div class="section-label">Support</div>
           <h2 class="section-title light">Help Chase Compete</h2>
-
           <p class="donate-why">
             Travel basketball comes with real costs—tournament fees, travel, lodging, uniforms,
             equipment, training, and more. Every contribution, big or small, helps Chase compete
             against top competition, gain exposure, and continue growing as a player and person.
           </p>
-
           <div class="progress-wrap">
             <div class="progress-header">
-              <div class="progress-raised">
-                <span>$</span><span id="raised-amount"></span>
-              </div>
-              <div class="progress-goal">
-                Goal: $<span id="goal-amount"></span>
-              </div>
+              <div class="progress-raised"><span>$</span><span id="raised-amount"></span></div>
+              <div class="progress-goal">Goal: $<span id="goal-amount"></span></div>
             </div>
             <div class="progress-bar-bg">
               <div class="progress-bar-fill" id="progress-bar"></div>
             </div>
-            <div class="progress-note">
-              Thank you to everyone who has already supported Chase’s journey.
-            </div>
+            <div class="progress-note">Thank you to everyone who has already supported Chase's journey.</div>
           </div>
-
+          <div class="tiers">
             <div class="tier">
               <div class="tier-amount">$50</div>
-              <div class="tier-desc">Fuel &amp; — Pocket Change & Meals Supporter — covers snacks and small travel expenses for a tournament dayhelps with gas and meals for a weekend.</div>
+              <div class="tier-desc">Fuel &amp; Meals Supporter — covers snacks and small travel expenses for a tournament day.</div>
               <div class="tier-arrow">→</div>
             </div>
             <div class="tier">
@@ -1572,7 +1378,7 @@
             </div>
             <div class="tier">
               <div class="tier-amount">$150</div>
-              <div class="tier-desc">Tournament Entry Sponsor — covers Chase’s entry fee for one summer tournament (7 total).</div>
+              <div class="tier-desc">Tournament Entry Sponsor — covers Chase's entry fee for one summer tournament (7 total).</div>
               <div class="tier-arrow">→</div>
             </div>
             <div class="tier">
@@ -1582,30 +1388,24 @@
             </div>
             <div class="tier">
               <div class="tier-amount">$500</div>
-              <div class="tier-desc">Season Equipment & Essentials Sponsor — helps cover shoes, basketballs, compression gear, and other essentials, supports uniforms, warm-ups, and replacement gear throughout the year.</div>
+              <div class="tier-desc">Season Equipment &amp; Essentials Sponsor — helps cover shoes, basketballs, compression gear, uniforms, and replacement gear throughout the year.</div>
               <div class="tier-arrow">→</div>
             </div>
           </div>
-          
-	</div>
-         
-	 <div class="custom-amount">
-            <label for="customAmount" style="color:rgba(244,241,235,0.8); font-size:0.85rem;">
-              Or enter a custom amount:
-            </label>
+          <div class="custom-amount">
+            <label for="customAmount" style="color:rgba(244,241,235,0.8); font-size:0.85rem;">Or enter a custom amount:</label>
             <input type="number" id="customAmount" placeholder="Custom $" min="1" />
             <button id="customDonateBtn">Donate</button>
           </div>
-
           <div class="sponsor-packages">
             <div class="sponsor-card">
               <h3>Silver Sponsor</h3>
               <div class="sponsor-amount">$750</div>
               <ul>
                 <li>Covers one full tournament weekend + one camp fee</li>
-                <li>Name listed on Chase’s website</li>
+                <li>Name listed on Chase's website</li>
                 <li>Optional shout-out on social media</li>
-                <li>Recognition in the season “Thank You” section</li>
+                <li>Recognition in the season "Thank You" section</li>
               </ul>
             </div>
             <div class="sponsor-card">
@@ -1613,10 +1413,10 @@
               <div class="sponsor-amount">$1,500</div>
               <ul>
                 <li>Covers two tournaments + two months of training</li>
-                <li>Logo or name featured on Chase’s website</li>
+                <li>Logo or name featured on Chase's website</li>
                 <li>Social media recognition</li>
                 <li>Optional logo on warm-up shirt</li>
-                <li>Priority updates on Chase’s season progress</li>
+                <li>Priority updates on Chase's season progress</li>
               </ul>
             </div>
             <div class="sponsor-card">
@@ -1626,7 +1426,7 @@
                 <li>Matches full summer travel cost</li>
                 <li>Covers tournament fees, training, equipment, and travel support</li>
                 <li>Prominent logo placement on website</li>
-                <li>Featured “Thank You” highlight section</li>
+                <li>Featured "Thank You" highlight section</li>
                 <li>Optional business shout-out on social media</li>
                 <li>Personalized thank-you video from Chase</li>
               </ul>
@@ -1636,44 +1436,34 @@
 
         <div class="reveal">
           <div class="donate-cta">
-            <!-- Replace href with your real Venmo and Cash App links -->
-            <a class="btn-donate btn-venmo" id="venmoButton" href="https://venmo.com/" target="_blank" rel="noopener">
-              Donate via Venmo
-            </a>
-            <a class="btn-donate btn-cashapp" id="cashappButton" href="https://cash.app/" target="_blank" rel="noopener">
-              Donate via Cash App
-            </a>
-            <a class="btn-donate" style="background:#232F3E; color:#fff;" href="https://www.amazon.com/hz/wishlist" target="_blank" rel="noopener">
-              Amazon Wish List
-            </a>
+            <a class="btn-donate btn-venmo" id="venmoButton" href="https://venmo.com/" target="_blank" rel="noopener">Donate via Venmo</a>
+            <a class="btn-donate btn-cashapp" id="cashappButton" href="https://cash.app/" target="_blank" rel="noopener">Donate via Cash App</a>
+            <a class="btn-donate" style="background:#232F3E; color:#fff;" href="https://www.amazon.com/hz/wishlist" target="_blank" rel="noopener">Amazon Wish List</a>
           </div>
-
           <div class="qr-grid">
             <div class="qr-card">
               <h4>Venmo QR</h4>
-              <!-- Replace src with your Venmo QR image in the repo -->
               <a href="https://venmo.com/" target="_blank" rel="noopener">
                 <img src="venmo-qr.png" alt="Venmo QR Code">
               </a>
-              <p>Scan or tap to open Venmo with Chase’s info ready.</p>
+              <p>Scan or tap to open Venmo with Chase's info ready.</p>
             </div>
             <div class="qr-card">
               <h4>Cash App QR</h4>
-              <!-- Replace src with your Cash App QR image in the repo -->
               <a href="https://cash.app/" target="_blank" rel="noopener">
                 <img src="cashapp-qr.png" alt="Cash App QR Code">
               </a>
-              <p>Scan or tap to open Cash App with Chase’s info ready.</p>
+              <p>Scan or tap to open Cash App with Chase's info ready.</p>
             </div>
           </div>
-
           <p class="donate-disclaimer">
-            All funds go directly toward Chase’s basketball journey—travel, training, equipment,
-            camps, and college exposure opportunities. If you’d like to give in another way
+            All funds go directly toward Chase's basketball journey—travel, training, equipment,
+            camps, and college exposure opportunities. If you'd like to give in another way
             (cash, check, or sponsorship), please reach out to his family directly. Thank you
             for believing in his path.
           </p>
         </div>
+
       </div>
     </div>
   </section>
@@ -1684,7 +1474,6 @@
         <div class="section-label">Contact</div>
         <h2 class="section-title">Coach Contact</h2>
       </div>
-
       <div class="coach-card reveal">
         <h3>For Coaches &amp; Recruiters</h3>
         <p><strong>High School:</strong> Mountain Island Charter</p>
@@ -1694,7 +1483,7 @@
         <p><strong>Hudl:</strong> [NEED HUDL LINK]</p>
         <p style="margin-top:0.8rem;">
           For direct coach contact information, game film, or schedule details, please reach out
-          to Chase’s family or program staff. This page is designed to give a clear snapshot of
+          to Chase's family or program staff. This page is designed to give a clear snapshot of
           who he is—on and off the court.
         </p>
       </div>
@@ -1702,20 +1491,14 @@
   </section>
 
   <footer>
-    <div class="footer-name">
-      Chase <span>Munir-Allston</span>
-    </div>
-    <div class="footer-tagline">
-      Mountain Island Charter • Class of 2028 • Power Forward / Small Forward • chasemunirallston.com
-    </div>
-
+    <div class="footer-name">Chase <span>Munir-Allston</span></div>
+    <div class="footer-tagline">Mountain Island Charter • Class of 2028 • Power Forward / Small Forward • chasemunirallston.com</div>
     <div class="footer-social">
       <a href="https://instagram.com/chaseenxtdoor" target="_blank" rel="noopener">Instagram</a>
       <a href="#" target="_blank" rel="noopener">Hudl</a>
     </div>
-
     <div class="footer-disclaimer">
-      This page was created to support Chase’s year-round basketball journey and 2026 summer travel league.
+      This page was created to support Chase's year-round basketball journey and 2026 summer travel league.
       Stats, schedule, and details will be updated as the season progresses. Custom domain:
       chasemunirallston.com (in progress or configured via DNS and GitHub Pages).
     </div>
@@ -1727,18 +1510,13 @@
       const styles = getComputedStyle(document.documentElement);
       const raised = parseFloat(styles.getPropertyValue('--raised')) || 0;
       const goal   = parseFloat(styles.getPropertyValue('--goal')) || 1;
-
       const raisedEl = document.getElementById('raised-amount');
       const goalEl   = document.getElementById('goal-amount');
       const barEl    = document.getElementById('progress-bar');
-
       if (raisedEl) raisedEl.textContent = raised.toLocaleString();
       if (goalEl)   goalEl.textContent   = goal.toLocaleString();
-
       const pct = Math.min(100, Math.max(0, (raised / goal) * 100));
-      requestAnimationFrame(() => {
-        if (barEl) barEl.style.width = pct + '%';
-      });
+      requestAnimationFrame(() => { if (barEl) barEl.style.width = pct + '%'; });
     })();
 
     // Reveal on scroll
@@ -1754,48 +1532,61 @@
     revealEls.forEach(el => observer.observe(el));
 
     // Carousel
-    const track = document.querySelector('.carousel-track');
-    const slides = track ? Array.from(track.children) : [];
-    const nextBtn = document.getElementById('nextBtn');
-    const prevBtn = document.getElementById('prevBtn');
-    let index = 0;
+    const track  = document.querySelector('.carousel-track');
+    const imgs   = Array.from(track.querySelectorAll('img'));
+    const total  = imgs.length;
+    let current  = 0;
+    let autoPlay;
 
-    function updateCarousel() {
-      if (!slides.length) return;
-      const width = slides[0].getBoundingClientRect().width;
-      track.style.transform = `translateX(-${index * width}px)`;
+    function goTo(index) {
+      current = (index + total) % total;
+      track.style.transform = `translateX(-${current * 100}%)`;
     }
 
-    if (nextBtn && prevBtn && slides.length) {
-      nextBtn.addEventListener('click', () => {
-        index = (index + 1) % slides.length;
-        updateCarousel();
-      });
+    document.getElementById('prevBtn').addEventListener('click', () => { goTo(current - 1); resetAutoPlay(); });
+    document.getElementById('nextBtn').addEventListener('click', () => { goTo(current + 1); resetAutoPlay(); });
 
-      prevBtn.addEventListener('click', () => {
-        index = (index - 1 + slides.length) % slides.length;
-        updateCarousel();
-      });
+    function startAutoPlay() { autoPlay = setInterval(() => goTo(current + 1), 4000); }
+    function resetAutoPlay() { clearInterval(autoPlay); startAutoPlay(); }
+    startAutoPlay();
 
-      window.addEventListener('resize', updateCarousel);
+    // Lightbox
+    const lightbox    = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    let lightboxIndex = 0;
+
+    function openLightbox(index) {
+      lightboxIndex = (index + total) % total;
+      lightboxImg.src = imgs[lightboxIndex].src;
+      lightbox.classList.add('active');
+      clearInterval(autoPlay);
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+      startAutoPlay();
     }
 
-    // Custom amount buttons (open Venmo/Cash App with amount if you later add deep links)
-    const customInput = document.getElementById('customAmount');
-    const customBtn = document.getElementById('customDonateBtn');
-    const venmoBtn = document.getElementById('venmoButton');
-    const cashappBtn = document.getElementById('cashappButton');
+    imgs.forEach((img, i) => img.addEventListener('click', () => openLightbox(i)));
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-prev').addEventListener('click', () => openLightbox(lightboxIndex - 1));
+    document.getElementById('lightbox-next').addEventListener('click', () => openLightbox(lightboxIndex + 1));
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'ArrowRight') openLightbox(lightboxIndex + 1);
+      if (e.key === 'ArrowLeft')  openLightbox(lightboxIndex - 1);
+      if (e.key === 'Escape')     closeLightbox();
+    });
 
+    // Custom donate button
+    const customInput  = document.getElementById('customAmount');
+    const customBtn    = document.getElementById('customDonateBtn');
+    const venmoBtn     = document.getElementById('venmoButton');
     if (customBtn && customInput) {
       customBtn.addEventListener('click', () => {
         const amount = parseFloat(customInput.value);
-        if (!amount || amount <= 0) {
-          alert('Please enter a valid amount.');
-          return;
-        }
-        // For now, just scroll to Venmo/Cash App buttons.
-        // Later, you can build deep links like:
-        // venmo://paycharge?txn=pay&recipients=USERNAME&amount=AMOUNT
+        if (!amount || amount <= 0) { alert('Please enter a valid amount.'); return; }
         venmoBtn?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     }
