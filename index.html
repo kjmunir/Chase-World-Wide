@@ -1396,34 +1396,20 @@
 </div>
 
 <!-- Payment Popup -->
-<div id="payment-popup" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9999; align-items:center; justify-content:center;">
-  <div style="background:#0b2740; border:2px solid #f5a623; border-radius:12px; padding:2.5rem; max-width:420px; width:90%; text-align:center; position:relative; overflow-y:auto; max-height:90vh;">
+    <div id="payment-popup" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9999; align-items:center; justify-content:center;">
+      <div style="background:#0b2740; border:2px solid #f5a623; border-radius:12px; padding:1.5rem; max-width:320px; width:90%; text-align:center; position:relative; overflow-y:auto; max-height:60vh;">
+        <button onclick="document.getElementById('payment-popup').style.display='none'" style="position:absolute; top:12px; right:16px; background:none; border:none; color:#f4f1eb; font-size:1.5rem; cursor:pointer;">✕</button>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.6rem; color:#f4f1eb; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.4rem;">Support Chase</div>
+        <div style="font-size:0.9rem; color:#8a96a8; margin-bottom:2rem;">Choose your preferred payment method below</div>
+        <a href="https://venmo.com/u/Chase-Munir-Allston" target="_blank" rel="noopener" style="display:block; background:#3D95CE; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.2rem; letter-spacing:0.1em; text-transform:uppercase; padding:1rem; border-radius:6px; text-decoration:none; margin-bottom:1rem;">Venmo</a>
+        <a href="https://cash.app/" target="_blank" rel="noopener" style="display:block; background:#00D632; color:#000; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.2rem; letter-spacing:0.1em; text-transform:uppercase; padding:1rem; border-radius:6px; text-decoration:none; margin-bottom:1rem;">Cash App</a>
+        <a href="https://enroll.zellepay.com/qr-codes?data=eyJuYW1lIjoiS0lBUkEiLCJhY3Rpb24iOiJwYXltZW50IiwidG9rZW4iOiI3MDQyNDExOTAxIn0=" target="_blank" rel="noopener" style="display:block; background:#6D1ED4; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.2rem; letter-spacing:0.1em; text-transform:uppercase; padding:1rem; border-radius:6px; text-decoration:none; margin-bottom:1rem;">Zelle</a>
+        <a href="https://www.amazon.com/hz/wishlist" target="_blank" rel="noopener" style="display:block; background:#232F3E; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.2rem; letter-spacing:0.1em; text-transform:uppercase; padding:1rem; border-radius:6px; text-decoration:none; margin-bottom:0;">Amazon Wish List</a>
+      </div>
+    </div>
 
-    <button onclick="document.getElementById('payment-popup').style.display='none'" style="position:absolute; top:12px; right:16px; background:none; border:none; color:#f4f1eb; font-size:1.5rem; cursor:pointer;">✕</button>
-
-    <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.6rem; color:#f4f1eb; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.4rem;">Support Chase</div>
-    <div style="font-size:0.9rem; color:#8a96a8; margin-bottom:2rem;">Choose your preferred payment method below</div>
-
-    <a href="https://venmo.com/u/Chase-Munir-Allston" target="_blank" rel="noopener"
-       style="display:block; background:#3D95CE; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.2rem; letter-spacing:0.1em; text-transform:uppercase; padding:1rem; border-radius:6px; text-decoration:none; margin-bottom:1rem;">
-      Venmo
-    </a>
-
-    <a href="https://cash.app/" target="_blank" rel="noopener"
-       style="display:block; background:#00D632; color:#000; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.2rem; letter-spacing:0.1em; text-transform:uppercase; padding:1rem; border-radius:6px; text-decoration:none; margin-bottom:1rem;">
-      Cash App
-    </a>
-
-    <a href="https://enroll.zellepay.com/qr-codes?data=eyJuYW1lIjoiS0lBUkEiLCJhY3Rpb24iOiJwYXltZW50IiwidG9rZW4iOiI3MDQyNDExOTAxIn0=" target="_blank" rel="noopener"
-       style="display:block; background:#6D1ED4; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.2rem; letter-spacing:0.1em; text-transform:uppercase; padding:1rem; border-radius:6px; text-decoration:none; margin-bottom:1rem;">
-      Zelle
-    </a>
-
-    <a href="https://www.amazon.com/hz/wishlist" target="_blank" rel="noopener"
-       style="display:block; background:#232F3E; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.2rem; letter-spacing:0.1em; text-transform:uppercase; padding:1rem; border-radius:6px; text-decoration:none; margin-bottom:0;">
-      Amazon Wish List
-    </a>
-
+  </body>
+</html>
   </div>
 </div>
           <div class="custom-amount">
